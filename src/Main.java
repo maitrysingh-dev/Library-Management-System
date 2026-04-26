@@ -21,9 +21,17 @@ public class Main {
 
             try {
 
-                System.out.println("\n1.Add Branch  2.Add Book  3.Add User");
-                System.out.println("4.Search  5.Checkout  6.Return");
-                System.out.println("7.Transfer  8.Recommend  9.Exit");
+                System.out.println("\n" + "=".repeat(46));
+                System.out.println("          LIBRARY MANAGEMENT SYSTEM");
+                System.out.println("=".repeat(46));
+                System.out.println("  [1] Add Branch         [7] Transfer Book");
+                System.out.println("  [2] Add Book           [8] Recommend Books");
+                System.out.println("  [3] Add User           [9] Update Book");
+                System.out.println("  [4] Search Books       [10] Update User");
+                System.out.println("  [5] Checkout Book      [11] Remove Book");
+                System.out.println("  [6] Return Book        [12] Exit");
+                System.out.println("-".repeat(46));
+                System.out.print("  Enter choice: ");
 
                 int choice = sc.nextInt();
                 sc.nextLine();
@@ -136,16 +144,44 @@ public class Main {
                         break;
 
                     case 9:
-                        System.exit(0);
+                        System.out.print("Branch ID: ");
+                        String ub_bid = sc.nextLine();
+                        System.out.print("ISBN: ");
+                        String ub_isbn = sc.nextLine();
+                        System.out.print("New Title: ");
+                        String ub_title = sc.nextLine();
+                        System.out.print("New Author: ");
+                        String ub_author = sc.nextLine();
+                        service.updateBook(ub_bid, ub_isbn, ub_title, ub_author);
+                        break;
 
+                    case 10:
+                        System.out.print("User ID: ");
+                        String up_pid = sc.nextLine();
+                        System.out.print("New Name: ");
+                        String up_name = sc.nextLine();
+                        service.updatePatron(up_pid, up_name);
+                        break;
+
+                    case 11:
+                        System.out.print("Branch ID: ");
+                        String rm_bid = sc.nextLine();
+                        System.out.print("ISBN: ");
+                        String rm_isbn = sc.nextLine();
+                        service.removeBook(rm_bid, rm_isbn);
+                        break;
+
+                    case 12:
+                        System.exit(0);
+                        break;
 
                     default:
                         System.out.println("Invalid choice!");
                 }
             }
 
-            catch (Exception e) {
-                System.out.println("Invalid input! Please enter correct data type.");
+            catch (java.util.InputMismatchException e) {
+                System.out.println("\n[!] Invalid input. Please enter the correct data type (e.g. number where requested).");
                 sc.nextLine();
             }
         }
